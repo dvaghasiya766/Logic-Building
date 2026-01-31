@@ -1,8 +1,8 @@
-package src;
 
 import java.util.Scanner;
+import myPackage.Reader;
 
-public class Demo {
+public class Main {
 
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {

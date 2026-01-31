@@ -1,13 +1,14 @@
-package src;
-import java.util.*; // Import utility classes like Scanner
+package myPackage;
+
+import java.util.Scanner;
 
 // Reader class to handle user input
-class Reader {
+public class Reader {
 
     // Method to read a String value from the user
     // scanner   → Scanner object for input
     // statement → Message to display before taking input
-    String readString(Scanner scanner, String statement) {
+    public String readString(Scanner scanner, String statement) {
 
         // If no prompt message is provided, use a default message
         if (statement.length() == 0) {
@@ -27,7 +28,7 @@ class Reader {
     // Static method to read an integer value from the user
     // scanner   → Scanner object for input
     // statement → Message to display before taking input
-    static int readInt(Scanner scanner, String statement) {
+    public static int readInt(Scanner scanner, String statement) {
 
         // If no prompt message is provided, use a default message
         if (statement.length() == 0) {
@@ -44,7 +45,7 @@ class Reader {
         return data;
     }
 
-    static String[] readStringArr(Scanner scanner, String statement) {
+    public static String[] readStringArr(Scanner scanner, String statement) {
 
         // If no prompt message is provided, use a default message
         if (statement.length() == 0) {
@@ -60,14 +61,15 @@ class Reader {
             String[] arr = new String[length];
             for (int i = 0; i < length; i++) {
                 statement = "Enter " + (i + 1) + " Element: ";
-                String ele = new Reader().readString(scanner, statement);
+                Reader r = new Reader();
+                String ele = r.readString(scanner, statement);
                 arr[i] = ele;
             }
             return arr;
         }
     }
 
-    static int[] readIntArr(Scanner scanner, String statement) {
+    public static int[] readIntArr(Scanner scanner, String statement) {
         // If no prompt message is provided, use a default message
         if (statement.length() == 0) {
             statement = "Enter a string: ";
@@ -82,7 +84,7 @@ class Reader {
             int[] arr = new int[length];
             for (int i = 0; i < length; i++) {
                 statement = "Enter " + (i + 1) + " Element: ";
-                int ele = Reader.readInt(scanner, statement);
+                int ele = readInt(scanner, statement);
                 arr[i] = ele;
             }
             return arr;
