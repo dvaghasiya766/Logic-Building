@@ -1,6 +1,6 @@
 
 import java.util.Scanner;
-import src.Reader;
+import utils.Reader;
 
 public class Main {
 
