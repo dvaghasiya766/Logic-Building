@@ -24,6 +24,5 @@ public class Demo {
             int[] intArray = Reader.readIntArr(scanner, "Enter Number Users: ");
             System.out.println("Int Array: " + java.util.Arrays.toString(intArray));
         }
-
     }
 }
