@@ -1,6 +1,6 @@
 
 import java.util.Scanner;
-import myPackage.Reader;
+import src.Reader;
 
 public class Main {
 
