@@ -1,5 +1,6 @@
 
 import java.util.Scanner;
+import utils.MergeTwoArray;
 import utils.Reader;
 
 public class Main {
@@ -24,6 +25,11 @@ public class Main {
             // Read an array of integers
             int[] intArray = Reader.readIntArr(scanner, "Enter Number Users: ");
             System.out.println("Int Array: " + java.util.Arrays.toString(intArray));
+
+            int[] arr1 = {1, 3, 5, 7, 0, 0, 0};
+            int[] arr2 = {2, 4, 6};
+
+            MergeTwoArray.merge(arr1, arr2, 4, 3);
         }
     }
 }
