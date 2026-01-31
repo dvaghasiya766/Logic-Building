@@ -1,4 +1,4 @@
-
+package src;
 import java.util.*; // Import utility classes like Scanner
 
 // Reader class to handle user input
