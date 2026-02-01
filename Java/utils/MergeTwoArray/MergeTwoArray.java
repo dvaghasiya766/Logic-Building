@@ -2,7 +2,7 @@ package utils.MergeTwoArray;
 
 // MergeTwoArray class to handle merging of two arrays
 // You are given 2 arrays, arr1 and arr2 of sizes m and n respectively.
-// arr1 is sorted in non-decreasing order and arr2 is sorted in non-increasing order.
+// arr1 is sorted in non-decreasing order and arr2 is sorted in non-decreasing order.
 // arr1 has enough space (size m + n) to hold all elements from both arrays.
 // Your task is to merge into arr1 so the result is sorted in non-decreasing order.
 // Note: You are not allowed to use extra space.
@@ -13,7 +13,7 @@ public class MergeTwoArray {
      *
      * @param arr1 - sorted ascending, size = m + n (first m elements are data,
      * rest are empty/0)
-     * @param arr2 - sorted descending, size = n
+     * @param arr2 - sorted ascending, size = n
      * @param m - number of actual elements in arr1
      * @param n - number of elements in arr2
      */

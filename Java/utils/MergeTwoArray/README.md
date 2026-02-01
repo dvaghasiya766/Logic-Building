@@ -96,74 +96,42 @@ Loop ends (j >= n), arr1 is now fully merged!
 
 ## 💻 Code Implementation
 
-```java
-package utils;
-
-public class MergeTwoArray {
-
-    /**
-     * Merges arr2 into arr1 in-place.
-     *
-     * @param arr1 - sorted ascending, size = m + n (first m elements are data, rest are empty/0)
-     * @param arr2 - sorted descending, size = n
-     * @param m - number of actual elements in arr1
-     * @param n - number of elements in arr2
-     */
-    public static void merge(int[] arr1, int[] arr2, int m, int n) {
-        int i = m - 1;      // Last valid element in arr1
-        int j = 0;          // First element in arr2 (largest, since arr2 is descending)
-        int k = m + n - 1;  // Last position in arr1
+````java
 # Merge Two Sorted Arrays
 
 ## 📋 Problem Statement
 
 You are given two arrays, `arr1` and `arr2`, with sizes `m` and `n` respectively:
 
-- `arr1` is sorted in non-decreasing (ascending) order and has size `m + n` where the first `m` elements are the valid data and the rest are empty slots to accommodate `arr2`.
-- `arr2` is sorted in non-increasing (descending) order and has size `n`.
+- `arr1` is sorted in non-decreasing (ascending) order and has size `m + n` where the first `m` elements are valid and the rest are empty slots to accommodate `arr2`.
+- `arr2` is sorted in non-decreasing (ascending) order and has size `n`.
 
 Task: Merge `arr2` into `arr1` in-place so that `arr1` becomes fully sorted in non-decreasing order.
 
-Constraint: Do not use extra space (i.e., merge without allocating another array).
-
-### Example
-
-```
-
-Input:
-arr1 = [1, 3, 5, 7, 0, 0, 0, 0] (m = 4)
-arr2 = [8, 6, 4, 2] (n = 4)
-
-Output:
-arr1 = [1, 2, 3, 4, 5, 6, 7, 8]
-
-````
+Constraint: Do not use extra space (merge without allocating another array).
 
 ---
 
-## 💡 Explanation
+## 💡 Key Idea
 
-Because `arr1` has extra space at the end and `arr2` is reverse-sorted, the safe approach is to fill `arr1` from the back. Compare the largest candidates from both arrays and place the larger one at the end of `arr1`. This prevents overwriting elements in `arr1` that haven't been processed yet.
-
----
-
-## 🧠 Logic (Step-by-step)
-
-1. Set pointers:
-   - `i = m - 1` (end of valid data in `arr1`)
-   - `j = 0` (start of `arr2`, which contains largest elements first)
-   - `k = m + n - 1` (last index of `arr1`)
-
-2. While `i >= 0` and `j < n`:
-   - If `arr1[i] > arr2[j]`, set `arr1[k] = arr1[i]` and decrement `i` and `k`.
-   - Else, set `arr1[k] = arr2[j]` and increment `j`, decrement `k`.
-
-3. If any elements remain in `arr2` (i.e., `j < n`), copy them into `arr1`.
-   Elements remaining in `arr1` (if any) are already in correct positions.
+Fill `arr1` from the back. Compare the largest candidates from the ends of both arrays and place the larger one at the end of `arr1`. This prevents overwriting unprocessed elements.
 
 ---
 
-## 💻 Code Implementation
+## 🧠 Implementation Details (matches `MergeTwoArray.java`)
+
+- Pointers used in the implementation:
+  - `array1LastIndex = m - 1` (last valid element in `arr1`)
+  - `array2LastIndex = n - 1` (last element in `arr2`)
+  - `sortedArrayLastIndex = m + n - 1` (position to fill in `arr1`)
+
+- Loop while both arrays have elements. Place the larger of `arr1[array1LastIndex]` and `arr2[array2LastIndex]` at `arr1[sortedArrayLastIndex]`, then move the corresponding pointer and decrement `sortedArrayLastIndex`.
+
+- After the loop, if `array2LastIndex >= 0`, copy remaining `arr2` elements into the beginning of `arr1`.
+
+---
+
+## 💻 Code (from `MergeTwoArray.java`)
 
 ```java
 package utils.MergeTwoArray;
@@ -171,49 +139,66 @@ package utils.MergeTwoArray;
 public class MergeTwoArray {
 
     /**
-     * Merge arr2 into arr1 in-place. Assumes arr1 has size m+n and first m elements are valid.
-     * arr1: sorted ascending, arr2: sorted descending
+     * Merges arr2 into arr1 in-place. Assumes arr1 length = m + n and
+     * first m elements of arr1 are valid. Both arrays are assumed sorted ascending.
      */
     public static void merge(int[] arr1, int[] arr2, int m, int n) {
-        int i = m - 1;      // last valid in arr1
-        int j = 0;          // first (largest) in arr2 (desc order)
-        int k = m + n - 1;  // last index in arr1
+        int array1LastIndex = m - 1;
+        int array2LastIndex = n - 1;
+        int sortedArrayLastIndex = m + n - 1;
 
-        while (i >= 0 && j < n) {
-            if (arr1[i] > arr2[j]) {
-                arr1[k--] = arr1[i--];
+        while (array1LastIndex >= 0 && array2LastIndex >= 0) {
+            if (arr1[array1LastIndex] > arr2[array2LastIndex]) {
+                arr1[sortedArrayLastIndex] = arr1[array1LastIndex];
+                array1LastIndex--;
             } else {
-                arr1[k--] = arr2[j++];
+                arr1[sortedArrayLastIndex] = arr2[array2LastIndex];
+                array2LastIndex--;
+            }
+            sortedArrayLastIndex--;
+        }
+
+        // Copy remaining arr2 elements (if any) to the start of arr1
+        if (array2LastIndex >= 0) {
+            for (int i = 0; i <= array2LastIndex; i++) {
+                arr1[i] = arr2[i];
             }
         }
-
-        while (j < n) { // remaining from arr2
-            arr1[k--] = arr2[j++];
-        }
-    }
-
-    // Simple test
-    public static void main(String[] args) {
-        int[] arr1 = {1, 3, 5, 7, 0, 0, 0, 0};
-        int[] arr2 = {8, 6, 4, 2};
-        merge(arr1, arr2, 4, 4);
-        System.out.println(java.util.Arrays.toString(arr1)); // [1,2,3,4,5,6,7,8]
     }
 }
 ````
 
 ---
 
+## ✅ Example
+
+Input:
+
+```
+arr1 = [1, 3, 5, 7, 0, 0, 0, 0]  // m = 4
+arr2 = [2, 4, 6, 8]              // n = 4
+```
+
+After `merge(arr1, arr2, 4, 4)`:
+
+```
+arr1 = [1, 2, 3, 4, 5, 6, 7, 8]
+```
+
+---
+
 ## ⏱ Complexity
 
-- Time: O(m + n) — each element is processed at most once
+- Time: O(m + n) — each element processed at most once
 - Space: O(1) — in-place merge, no extra arrays
 
 ---
 
-## Example Walkthrough
+## 💡 Tips for Students
 
-Given the input above, we compare `arr1[3]=7` with `arr2[0]=8`, place 8 at the end, and continue until all elements are merged.
+- Verify the sort order of both arrays before choosing pointer directions.
+- When merging in-place, fill from the side with available space to avoid overwrites.
+- Walk through a small example on paper to check pointer movements before coding.
 
 ---
 
