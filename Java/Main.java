@@ -1,7 +1,8 @@
 
 import java.util.Scanner;
-import utils.Factors.Factors;
+import utils.Factor.Factors;
 import utils.MergeTwoArray.MergeTwoArray;
+import utils.Prime.PrimeNumber;
 import utils.Reader;
 
 public class Main {
@@ -17,8 +18,10 @@ public class Main {
             MergeTwoArray.merge(arr1, arr2, arr1.length - arr2.length, arr2.length);
 
             int number = Reader.readInt(scanner, "Enter a positive integer to find its factors: ");
-            int[] factors = Factors.factor(number);
-            System.out.println("Factors of " + number + ": " + java.util.Arrays.toString(factors));
+            Factors.factor(number);
+
+            int primeNumber = Reader.readInt(scanner, "Enter a positive integer to check if it is prime: ");
+            PrimeNumber.printPrimeStatus(primeNumber);
         }
     }
 }

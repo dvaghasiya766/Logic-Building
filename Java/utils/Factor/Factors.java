@@ -1,4 +1,4 @@
-package utils.Factors;
+package utils.Factor;
 
 // Factors of a Number
 // You are given a positive integer N.
@@ -16,7 +16,7 @@ public class Factors {
      * @param number - The positive integer to find factors for
      * @return Array containing all factors of the number
      */
-    public static int[] factor(int number) {
+    public static void factor(int number) {
         // First pass: Count how many factors exist
         int count = 0;
         for (int i = 1; i <= number; i++) {
@@ -36,6 +36,6 @@ public class Factors {
             }
         }
 
-        return factors;
+        System.out.println("Factors of " + number + ": " + java.util.Arrays.toString(factors));
     }
 }
