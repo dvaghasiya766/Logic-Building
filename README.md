@@ -217,3 +217,5 @@ For questions or suggestions, reach out to your instructor or raise an issue in 
 **Happy Coding! 🎉**
 
 _"First, solve the problem. Then, write the code." - John Johnson_
+
+![First solve the problem, then write the code](https://www.tshirtdesigns.com/wp-content/uploads/2024/09/First-solve-the-problem-then-write-the-code_2.webp)
