@@ -1,6 +1,6 @@
 
 import java.util.Scanner;
-import utils.MergeTwoArray;
+import utils.MergeTwoArray.MergeTwoArray;
 import utils.Reader;
 
 public class Main {

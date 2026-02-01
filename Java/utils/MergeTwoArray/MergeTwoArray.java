@@ -1,4 +1,4 @@
-package utils;
+package utils.MergeTwoArray;
 
 // MergeTwoArray class to handle merging of two arrays
 // You are given 2 arrays, arr1 and arr2 of sizes m and n respectively.
