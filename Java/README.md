@@ -1,138 +1,173 @@
-# Reader Utility Class
+# Main.java - Entry Point for Logic Building Practice
 
-A Java utility class for handling various types of user input through the console.
+## 📋 Overview
 
-## Package
-
-```java
-package utils;
-```
-
-## Overview
-
-The `Reader` class provides convenient methods to read different types of user input from the console using a `Scanner` object. It supports reading single values (strings and integers) as well as arrays.
+`Main.java` serves as the **entry point** for the Logic Building practice project. It demonstrates how to use various utility classes and methods for common programming tasks like reading user input and merging arrays.
 
 ---
 
-## Methods
+## 🎯 Purpose
 
-### `readString(Scanner scanner, String statement)`
+This file showcases:
 
-Reads a single string (word) from the user.
-
-| Parameter   | Type      | Description                                 |
-| ----------- | --------- | ------------------------------------------- |
-| `scanner`   | `Scanner` | Scanner object for input                    |
-| `statement` | `String`  | Prompt message to display (empty = default) |
-
-**Returns:** `String` - The user's input
-
-**Example:**
-
-```java
-Reader r = new Reader();
-String name = r.readString(scanner, "Enter Your Name: ");
-```
+1. **User Input Handling** - Using the `Reader` utility class
+2. **Array Operations** - Using the `MergeTwoArray` utility class
+3. **Resource Management** - Proper use of try-with-resources for Scanner
 
 ---
 
-### `readInt(Scanner scanner, String statement)` _(static)_
+## 📦 Dependencies
 
-Reads an integer value from the user.
+The Main class imports and uses the following utilities:
 
-| Parameter   | Type      | Description                                 |
-| ----------- | --------- | ------------------------------------------- |
-| `scanner`   | `Scanner` | Scanner object for input                    |
-| `statement` | `String`  | Prompt message to display (empty = default) |
-
-**Returns:** `int` - The user's integer input
-
-**Example:**
-
-```java
-int age = Reader.readInt(scanner, "Enter Your Age: ");
-```
+| Import                              | Description                                  |
+| ----------------------------------- | -------------------------------------------- |
+| `java.util.Scanner`                 | Built-in Java class for reading user input   |
+| `utils.MergeTwoArray.MergeTwoArray` | Custom utility for merging two sorted arrays |
+| `utils.Reader`                      | Custom utility for simplified input reading  |
 
 ---
 
-### `readStringArr(Scanner scanner, String statement)` _(static)_
+## 💻 Code Walkthrough
 
-Reads an array of strings from the user. First prompts for the array length, then prompts for each element.
-
-| Parameter   | Type      | Description                     |
-| ----------- | --------- | ------------------------------- |
-| `scanner`   | `Scanner` | Scanner object for input        |
-| `statement` | `String`  | Prompt message for array length |
-
-**Returns:** `String[]` - Array of strings entered by the user
-
-**Example:**
+### 1. Scanner with Try-With-Resources
 
 ```java
-String[] names = Reader.readStringArr(scanner, "Enter Number of Users: ");
-// User enters: 3
-// Then enters each name individually
-```
-
----
-
-### `readIntArr(Scanner scanner, String statement)` _(static)_
-
-Reads an array of integers from the user. First prompts for the array length, then prompts for each element.
-
-| Parameter   | Type      | Description                     |
-| ----------- | --------- | ------------------------------- |
-| `scanner`   | `Scanner` | Scanner object for input        |
-| `statement` | `String`  | Prompt message for array length |
-
-**Returns:** `int[]` - Array of integers entered by the user
-
-**Example:**
-
-```java
-int[] scores = Reader.readIntArr(scanner, "Enter Number of Scores: ");
-// User enters: 5
-// Then enters each score individually
-```
-
----
-
-## Complete Usage Example
-
-```java
-import java.util.Scanner;
-import utils.Reader;
-
-public class Main {
-    public static void main(String[] args) {
-        try (Scanner scanner = new Scanner(System.in)) {
-            Reader r = new Reader();
-
-            // Read a single string
-            String name = r.readString(scanner, "Enter Your Name: ");
-            System.out.println("Hello, " + name);
-
-            // Read a single integer
-            int age = Reader.readInt(scanner, "Enter Your Age: ");
-            System.out.println("You are " + age + " years old");
-
-            // Read an array of strings
-            String[] users = Reader.readStringArr(scanner, "How many users? ");
-            System.out.println("Users: " + java.util.Arrays.toString(users));
-
-            // Read an array of integers
-            int[] numbers = Reader.readIntArr(scanner, "How many numbers? ");
-            System.out.println("Numbers: " + java.util.Arrays.toString(numbers));
-        }
-    }
+try (Scanner scanner = new Scanner(System.in)) {
+    // Code here
 }
 ```
 
+**Why?** The `try-with-resources` statement ensures the Scanner is automatically closed after use, preventing resource leaks.
+
 ---
 
-## Notes
+### 2. Reading Different Input Types
 
-- All methods use a default prompt message if an empty string is provided
-- Array methods return an array of size 1 if the user enters a length less than 1
-- The `readString` method reads a single word (uses `scanner.next()`)
-- Remember to close the `Scanner` when done (use try-with-resources)
+#### Reading a String
+
+```java
+Reader r = new Reader();
+String userStringInput = r.readString(scanner, "Enter Your Name: ");
+System.out.println(userStringInput);
+```
+
+- Creates a `Reader` instance
+- Prompts user for their name
+- Displays the entered name
+
+#### Reading an Integer
+
+```java
+int userIntInput = Reader.readInt(scanner, "Enter Your Age: ");
+System.out.println(userIntInput);
+```
+
+- Uses **static method** `readInt()` (no instance needed)
+- Prompts user for their age
+- Displays the entered age
+
+#### Reading a String Array
+
+```java
+String[] stringArray = Reader.readStringArr(scanner, "Enter Number Users: ");
+System.out.println("String Array: " + java.util.Arrays.toString(stringArray));
+```
+
+- Prompts for number of elements, then reads each string
+- Prints the entire array
+
+#### Reading an Integer Array
+
+```java
+int[] intArray = Reader.readIntArr(scanner, "Enter Number Users: ");
+System.out.println("Int Array: " + java.util.Arrays.toString(intArray));
+```
+
+- Prompts for number of elements, then reads each integer
+- Prints the entire array
+
+---
+
+### 3. Merging Two Sorted Arrays
+
+```java
+int[] arr1 = {1, 3, 5, 7, 0, 0, 0};  // Sorted ascending with extra space
+int[] arr2 = {2, 4, 6};              // Sorted descending
+
+MergeTwoArray.merge(arr1, arr2, 4, 3);
+```
+
+- `arr1` has 4 actual elements + 3 empty slots
+- `arr2` has 3 elements
+- Merges both into `arr1` in sorted order
+
+**Expected Output:** `[1, 2, 3, 4, 5, 6, 7]`
+
+---
+
+## ▶️ How to Run
+
+### Using Command Line
+
+```bash
+# Navigate to Java folder
+cd "e:\RKU\Logic Building\Java"
+
+# Compile all Java files
+javac Main.java utils/Reader.java utils/MergeTwoArray/MergeTwoArray.java
+
+# Run the Main class
+java Main
+```
+
+### Sample Execution
+
+```
+Enter Your Name: John
+John
+Enter Your Age: 25
+25
+Enter Number Users: 3
+Enter user 1: Alice
+Enter user 2: Bob
+Enter user 3: Charlie
+String Array: [Alice, Bob, Charlie]
+Enter Number Users: 3
+Enter number 1: 10
+Enter number 2: 20
+Enter number 3: 30
+Int Array: [10, 20, 30]
+[1, 2, 3, 4, 5, 6, 7]
+```
+
+---
+
+## 📁 Project Structure
+
+```
+Java/
+├── Main.java                          ← You are here
+├── README.md
+└── utils/
+    ├── Reader.java                    ← Input utility class
+    └── MergeTwoArray/
+        ├── MergeTwoArray.java         ← Array merging utility
+        └── README.md                  ← Documentation for merge
+```
+
+---
+
+## 🔑 Key Learning Points
+
+1. **Try-With-Resources** - Always use for closeable resources like Scanner
+2. **Static vs Instance Methods** - `Reader.readInt()` vs `r.readString()`
+3. **Modular Code** - Separate utilities for reusability
+4. **Package Structure** - Organizing code into logical packages
+
+---
+
+## 📚 Related Files
+
+- [Reader.java](utils/Reader.java) - Input utility methods
+- [MergeTwoArray](utils/MergeTwoArray/) - Array merging with documentation
