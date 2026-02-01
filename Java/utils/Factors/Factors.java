@@ -16,7 +16,7 @@ public class Factors {
      * @param number - The positive integer to find factors for
      * @return Array containing all factors of the number
      */
-    public static int[] Factors(int number) {
+    public static int[] factor(int number) {
         // First pass: Count how many factors exist
         int count = 0;
         for (int i = 1; i <= number; i++) {

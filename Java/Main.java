@@ -1,5 +1,6 @@
 
 import java.util.Scanner;
+import utils.Factors.Factors;
 import utils.MergeTwoArray.MergeTwoArray;
 import utils.Reader;
 
@@ -8,28 +9,16 @@ public class Main {
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
             // All your scanner usage code goes here
-            Reader r = new Reader();
+            // Reader r = new Reader();
 
-            // Read a string using the instance method
-            String userStringInput = r.readString(scanner, "Enter Your Name: ");
-            System.out.println(userStringInput);
+            int[] arr1 = Reader.readIntArr(scanner, "Enter Number of Array 1 Elements: ");
+            int[] arr2 = Reader.readIntArr(scanner, "Enter Number of Array 2 Elements: ");
 
-            // Read an integer using the static method
-            int userIntInput = Reader.readInt(scanner, "Enter Your Age: ");
-            System.out.println(userIntInput);
+            MergeTwoArray.merge(arr1, arr2, arr1.length - arr2.length, arr2.length);
 
-            // Read an array of strings
-            String[] stringArray = Reader.readStringArr(scanner, "Enter Number Users: ");
-            System.out.println("String Array: " + java.util.Arrays.toString(stringArray));
-
-            // Read an array of integers
-            int[] intArray = Reader.readIntArr(scanner, "Enter Number Users: ");
-            System.out.println("Int Array: " + java.util.Arrays.toString(intArray));
-
-            int[] arr1 = {1, 3, 5, 7, 0, 0, 0};
-            int[] arr2 = {2, 4, 6};
-
-            MergeTwoArray.merge(arr1, arr2, 4, 3);
+            int number = Reader.readInt(scanner, "Enter a positive integer to find its factors: ");
+            int[] factors = Factors.factor(number);
+            System.out.println("Factors of " + number + ": " + java.util.Arrays.toString(factors));
         }
     }
 }
