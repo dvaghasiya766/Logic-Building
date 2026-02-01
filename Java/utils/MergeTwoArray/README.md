@@ -2,6 +2,108 @@
 
 ## 📋 Problem Statement
 
+You are given two arrays, `arr1` and `arr2`, with sizes `m` and `n` respectively:
+
+- `arr1` is sorted in non-decreasing (ascending) order and has size `m + n` where the first `m` elements are valid and the rest are empty slots to accommodate `arr2`.
+- `arr2` is sorted in non-decreasing (ascending) order and has size `n`.
+
+Task: Merge `arr2` into `arr1` in-place so that `arr1` becomes fully sorted in non-decreasing order.
+
+Constraint: Do not use extra space (merge without allocating another array).
+
+---
+
+## 💡 Key Idea
+
+Fill `arr1` from the back. Compare the largest elements from the ends of both arrays and place the larger one at the end of `arr1`. This avoids overwriting unprocessed values.
+
+---
+
+## 🧠 Implementation Details (matches `MergeTwoArray.java`)
+
+- Pointers used:
+  - `array1LastIndex = m - 1` (last valid element in `arr1`)
+  - `array2LastIndex = n - 1` (last element in `arr2`)
+  - `sortedArrayLastIndex = m + n - 1` (position to fill in `arr1`)
+
+- While both arrays have elements, place the larger of `arr1[array1LastIndex]` and `arr2[array2LastIndex]` at `arr1[sortedArrayLastIndex]`, then move the corresponding pointer and decrement `sortedArrayLastIndex`.
+
+- After the loop, if `array2LastIndex >= 0`, copy remaining `arr2` elements into the beginning of `arr1`.
+
+---
+
+## 💻 Code (from `MergeTwoArray.java`)
+
+```java
+package utils.MergeTwoArray;
+
+public class MergeTwoArray {
+
+    /**
+     * Merges arr2 into arr1 in-place. Assumes arr1 length = m + n and
+     * first m elements of arr1 are valid. Both arrays are sorted ascending.
+     */
+    public static void merge(int[] arr1, int[] arr2, int m, int n) {
+        int array1LastIndex = m - 1;
+        int array2LastIndex = n - 1;
+        int sortedArrayLastIndex = m + n - 1;
+
+        while (array1LastIndex >= 0 && array2LastIndex >= 0) {
+            if (arr1[array1LastIndex] > arr2[array2LastIndex]) {
+                arr1[sortedArrayLastIndex] = arr1[array1LastIndex];
+                array1LastIndex--;
+            } else {
+                arr1[sortedArrayLastIndex] = arr2[array2LastIndex];
+                array2LastIndex--;
+            }
+            sortedArrayLastIndex--;
+        }
+
+        // Copy remaining arr2 elements (if any) to the start of arr1
+        if (array2LastIndex >= 0) {
+            for (int i = 0; i <= array2LastIndex; i++) {
+                arr1[i] = arr2[i];
+            }
+        }
+    }
+}
+```
+
+---
+
+## ✅ Example
+
+Input:
+
+```
+arr1 = [1, 3, 5, 7, 0, 0, 0, 0]  // m = 4
+arr2 = [2, 4, 6, 8]              // n = 4
+```
+
+After `merge(arr1, arr2, 4, 4)`:
+
+```
+arr1 = [1, 2, 3, 4, 5, 6, 7, 8]
+```
+
+---
+
+## ⏱ Complexity
+
+- Time: O(m + n)
+- Space: O(1)
+
+---
+
+## 💡 Tips for Students
+
+- Verify the sort order of both arrays before choosing pointer directions.
+- Fill from the side with free space to avoid overwrites when merging in-place.
+
+# Merge Two Sorted Arrays
+
+## 📋 Problem Statement
+
 You are given **two arrays**, `arr1` and `arr2` of sizes `m` and `n` respectively:
 
 - `arr1` is sorted in **non-decreasing order** (ascending)
